@@ -12,19 +12,20 @@ var Body = React.createClass({
     this.setState({ items: newState });
   },
 
-  handleDelete() {
+  handleDelete(id) {
     $.ajax({
-      url: '/api/v1/items/${id}',
+      url: `/api/v1/items/${id}`,
       type: 'DELETE',
-      success() => {
+      success: () => {
+        console.log('Ping!')
         this.removeItemClient(id);
       }
-    )};
+    });
   },
 
   removeItemClient(id) {
     var newItems = this.state.items.filter((item) => {
-      return item.id !=id;
+      return item.id != id;
     });
     this.setState({ items: newItems });
   },
